@@ -79,6 +79,9 @@ public class KeycloakUriInfo implements UriInfo {
         if (absolutePath == null) {
             absolutePath = delegate.getAbsolutePath();
         }
+        if (absolutePath != null && absolutePath.toString().startsWith("http://")) {
+            absolutePath = URI.create(absolutePath.toString().replaceFirst("http://", "https://"));
+        }
         return absolutePath;
     }
 
